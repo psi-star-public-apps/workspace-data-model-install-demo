@@ -1,0 +1,9 @@
+apiVersion: platform.psi/2026-03-01
+kind: page
+id: home
+name: Home
+spec:
+  handle: home
+  route: /
+  title: Workspace Data Model Install Demo
+  rootComponentRefs: []

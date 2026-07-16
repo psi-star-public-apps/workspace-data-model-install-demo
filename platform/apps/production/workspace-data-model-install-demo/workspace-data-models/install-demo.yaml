@@ -1,0 +1,45 @@
+apiVersion: platform.psi/2026-03-01
+kind: workspace-data-model
+id: install-demo
+name: Install Demo Workspace Data Model
+spec:
+  installPolicy:
+    mode: additive_only
+    target: workspace_db
+  logicalSchemas:
+    - name: install_demo_v2
+      tables:
+        - name: projects
+          columns:
+            - { name: id, type: uuid, nullable: false, primary: true, defaultKind: gen_random_uuid }
+            - { name: code, type: text, nullable: false, unique: true }
+            - { name: name, type: text, nullable: false }
+            - { name: status, type: text, nullable: false, defaultKind: literal, defaultValue: active }
+            - { name: settings, type: jsonb, nullable: false, defaultKind: json_empty_object }
+            - { name: created_at, type: timestamp with time zone, nullable: false, defaultKind: current_timestamp }
+          indexes:
+            - { name: projects_status_idx, columns: [status] }
+        - name: tasks
+          columns:
+            - { name: id, type: uuid, nullable: false, primary: true, defaultKind: gen_random_uuid }
+            - { name: project_id, type: uuid, nullable: false }
+            - { name: title, type: text, nullable: false }
+            - { name: sort_order, type: integer, nullable: false, defaultKind: literal, defaultValue: 0 }
+            - { name: done, type: boolean, nullable: false, defaultKind: literal, defaultValue: false }
+            - { name: metadata, type: jsonb, nullable: false, defaultKind: json_empty_object }
+            - { name: created_at, type: timestamp with time zone, nullable: false, defaultKind: current_timestamp }
+          foreignKeys:
+            - columns: [project_id]
+              referencedTable: install_demo_v2.projects
+              referencedColumns: [id]
+              onDelete: CASCADE
+              onUpdate: CASCADE
+          indexes:
+            - { name: tasks_project_done_idx, columns: [project_id, done] }
+            - { name: tasks_project_sort_idx, columns: [project_id, sort_order] }
+  lookupSeeds:
+    - tableRef: install_demo_v2.projects
+      conflictColumns: [code]
+      rows:
+        - { code: demo-alpha, name: Demo Alpha, status: active }
+        - { code: demo-beta, name: Demo Beta, status: planning }

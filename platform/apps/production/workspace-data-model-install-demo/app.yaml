@@ -1,0 +1,16 @@
+apiVersion: platform.psi/2026-03-01
+kind: app
+id: workspace-data-model-install-demo
+name: Workspace Data Model Install Demo
+spec:
+  appHandle: workspace-data-model-install-demo
+  slug: workspace-data-model-install-demo
+  title: Workspace Data Model Install Demo
+  type: front-end
+  homePageRef: page:home
+  runtimeBootstrap:
+    publicAccess:
+      isEnabled: false
+    maintenanceMode:
+      isEnabled: false
+      message: ""

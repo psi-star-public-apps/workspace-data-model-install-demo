@@ -1,0 +1,7 @@
+apiVersion: platform.psi/2026-03-01
+kind: objective
+id: objective
+name: Objective
+spec:
+  title: Workspace DB data-model install proof
+  summary: Demonstrates that standard template install applies compiler-produced workspace-data-model install plans into Workspace DB.

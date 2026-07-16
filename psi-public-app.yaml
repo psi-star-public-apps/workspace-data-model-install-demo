@@ -1,0 +1,10 @@
+apiVersion: platform.psi/public-app/v1
+kind: PublicApp
+app:
+  path: platform/apps/production/workspace-data-model-install-demo
+  handle: workspace-data-model-install-demo
+  displayName: Workspace Data Model Install Demo
+  summary: Installs a small workspace DB data model with a versioned logical schema, project table, task table, indexes, FK, and seed rows.
+  icon:
+    name: database
+requiredBindings: []
