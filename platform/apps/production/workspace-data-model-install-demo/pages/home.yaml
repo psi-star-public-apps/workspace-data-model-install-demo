@@ -3,7 +3,12 @@ kind: page
 id: home
 name: Home
 spec:
+  pageKind: content
   handle: home
   route: /
   title: Workspace Data Model Install Demo
+  navigation:
+    icon: home
+    order: 0
+    visible: true
   rootComponentRefs: []
